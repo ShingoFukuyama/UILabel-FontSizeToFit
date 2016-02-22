@@ -25,13 +25,18 @@ Just add one line to fit font size to the label.
 label.fontSizeToFit()
 ```
 
-### Objective-C
++ [/Swift/UILabel_FontSizeToFit/UILabel+FontSizeToFit.swift](docs/Swift/UILabel_FontSizeToFit/UILabel%2BFontSizeToFit.swift)
 
-Do not forget `#import "UILabel+FontSizeToFit.h"`
+### Objective-C
 
 ```objc
 [label fontSizeToFit];
 ```
+
++ [/Objective-C/UILabel_FontSizeToFitObjC/ViewController.h](docs/Objective-C/UILabel_FontSizeToFitObjC/ViewController.h)
++ [/Objective-C/UILabel_FontSizeToFitObjC/UILabel+FontSizeToFit.m](docs/Objective-C/UILabel_FontSizeToFitObjC/ViewController.m)
+
+Do not forget `#import "UILabel+FontSizeToFit.h"`
 
 
 ## License
