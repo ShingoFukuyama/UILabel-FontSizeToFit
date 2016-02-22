@@ -8,7 +8,8 @@ label.adjustsFontSizeToFitWidth = true
 label.numberOfLines = 1
 ```
 
-However, what if you want to make it more than one line?
+However, it works only when `numberOfLines` is 1.
+So, what if you want to make it more than one line?
 
 That is why this UILabel extension exists!
 
