@@ -23,7 +23,9 @@ extension UILabel {
         let fontName = self.font.fontName
         let fontSize = self.font.pointSize
         let minimumFontSize = fontSize * minimumFontScale
+        let isOneLine = (self.numberOfLines == 1)
         
+        var boundingSize = CGSizeZero
         var area = CGSizeZero
         var font = UIFont()
         var fs = fontSize
@@ -37,9 +39,23 @@ extension UILabel {
         while (true) {
             font = UIFont(name: fontName, size: fs)!
             newAttributes[NSFontAttributeName] = font
-            area = NSString(string: text).boundingRectWithSize(CGSize(width: size.width, height: CGFloat.max), options: .UsesLineFragmentOrigin, attributes: newAttributes, context: nil).size
-            if area.height <= size.height {
-                break;
+            
+            if isOneLine {
+                boundingSize = CGSize(width: CGFloat.max, height: size.height)
+            }
+            else {
+                boundingSize = CGSize(width: size.width, height: CGFloat.max)
+            }
+            area = NSString(string: text).boundingRectWithSize(boundingSize, options: .UsesLineFragmentOrigin, attributes: newAttributes, context: nil).size
+            if isOneLine {
+                if area.width <= size.width {
+                    break;
+                }
+            }
+            else {
+                if area.height <= size.height {
+                    break;
+                }
             }
             
             if fs == minimumFontSize {

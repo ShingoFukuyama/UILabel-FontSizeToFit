@@ -25,6 +25,7 @@
     NSString *fontName = self.font.fontName;
     CGFloat fontSize = self.font.pointSize;
     CGFloat minimumFontSize = fontSize * minimumFontScale;
+    BOOL isOneLine = (self.numberOfLines == 1);
     
     CGSize area;
     UIFont *font;
@@ -40,12 +41,26 @@
     while (1) {
         font = [UIFont fontWithName:fontName size:fs];
         newAttributes[NSFontAttributeName] = font;
-        area = [text boundingRectWithSize:CGSizeMake(size.width, CGFLOAT_MAX)
+        CGSize boundingSize;
+        if (isOneLine) {
+            boundingSize = CGSizeMake(CGFLOAT_MAX, size.height);
+        }
+        else {
+            boundingSize = CGSizeMake(size.width, CGFLOAT_MAX);
+        }
+        area = [text boundingRectWithSize:boundingSize
                                   options:NSStringDrawingUsesLineFragmentOrigin
                                attributes:newAttributes
                                   context:nil].size;
-        if (area.height <= size.height) {
-            break;
+        if (isOneLine) {
+            if (area.width <= size.width) {
+                break;
+            }
+        }
+        else {
+            if (area.height <= size.height) {
+                break;
+            }
         }
         
         if (fs == minimumFontSize) {
